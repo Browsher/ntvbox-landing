@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-lg shadow-orange-500/30;
+  }
+
+  .btn-secondary {
+    @apply border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-200;
+  }
+
+  .card-dark {
+    background: linear-gradient(135deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid #1c1c1c;
+    border-radius: 16px;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-white;
+  }
+
+  .orange-glow {
+    box-shadow: 0 0 40px rgba(249, 115, 22, 0.15);
+  }
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #f97316, #fb923c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Shimmer animation for CTA */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.btn-shimmer {
+  background: linear-gradient(90deg, #ea580c 0%, #f97316 40%, #fb923c 50%, #f97316 60%, #ea580c 100%);
+  background-size: 200% auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .btn-shimmer {
+    animation: shimmer 3s linear infinite;
+  }
+}
+
+/* Bounce animation for WhatsApp float */
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-bounce-slow {
+    animation: bounce-slow 2s ease-in-out infinite;
+  }
+}
+
+/* Hero section responsive layout */
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 1.5rem 2.5rem;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  gap: 2rem;
+  align-items: stretch;
+}
+
+.hero-h1 {
+  font-size: 44px;
+}
+
+.hero-price {
+  font-size: 34px;
+}
+
+@media (max-width: 767px) {
+  .hero-inner {
+    padding: 72px 1.25rem 2rem;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-h1 {
+    font-size: 30px;
+    letter-spacing: -0.5px;
+  }
+
+  .hero-price {
+    font-size: 26px;
+  }
+}
+
+/* Spinner for BuyButton loading state */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Sticky nav shadow */
+.nav-scrolled {
+  box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+}
+
+/* Progress bar for trust */
+.trust-bar {
+  background: linear-gradient(90deg, #f97316, #fb923c);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #111111;
+}
+::-webkit-scrollbar-thumb {
+  background: #f97316;
+  border-radius: 3px;
+}
