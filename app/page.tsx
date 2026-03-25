@@ -21,7 +21,7 @@ const CONFIG = {
     productHandle: 'ntvbox',
   },
   whatsapp: {
-    number: '5511999999999', // ← substitua pelo seu número (com DDI e DDD, sem espaços)
+    number: '558798130541', // ← substitua pelo seu número (com DDI e DDD, sem espaços)
     message: 'Olá! Quero comprar o NTVBox. Pode me ajudar?',
   },
   price: 'R$ 399,00',
@@ -33,8 +33,8 @@ const CONFIG = {
 // SHOPIFY CHECKOUT
 // ============================================================
 
-async function createShopifyCheckout() {
-  const response = await fetch('https://ntv-box.myshopify.com/api/2024-01/graphql.json', {
+async function createShopifyCheckout(quantity: number = 1) {
+  const response = await fetch('https://ntv-box.myshopify.com/api/2026-01/graphql.json', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -44,7 +44,7 @@ async function createShopifyCheckout() {
       query: `
         mutation cartCreate {
           cartCreate(input: {
-            lines: [{ quantity: 1, merchandiseId: "gid://shopify/ProductVariant/47960844927224" }]
+            lines: [{ quantity: ${quantity}, merchandiseId: "gid://shopify/ProductVariant/47960844927224" }]
           }) {
             cart {
               checkoutUrl
@@ -62,10 +62,12 @@ async function createShopifyCheckout() {
   const data = await response.json()
   console.log('[Shopify] cartCreate response:', JSON.stringify(data, null, 2))
 
-  const checkoutUrl = data?.data?.cartCreate?.cart?.checkoutUrl
-  console.log('[Shopify] checkoutUrl:', checkoutUrl)
-
-  return checkoutUrl
+const checkoutUrl = data?.data?.cartCreate?.cart?.checkoutUrl
+const fixedUrl = checkoutUrl
+  ?.replace('ntv-box.com', 'ntv-box.myshopify.com')
+  ?.replace('channel=online_store', 'channel=headless')
+console.log('[Shopify] checkoutUrl:', fixedUrl)
+return fixedUrl
 }
 
 function BuyButton({
@@ -75,6 +77,7 @@ function BuyButton({
   extraOnClick,
   onMouseOver,
   onMouseOut,
+  quantity = 1,
 }: {
   children: React.ReactNode
   className?: string
@@ -82,6 +85,7 @@ function BuyButton({
   extraOnClick?: () => void
   onMouseOver?: React.MouseEventHandler<HTMLButtonElement>
   onMouseOut?: React.MouseEventHandler<HTMLButtonElement>
+  quantity?: number
 }) {
   const [loading, setLoading] = useState(false)
 
@@ -97,7 +101,7 @@ function BuyButton({
     const tab = window.open('', '_blank')
 
     try {
-      const url = await createShopifyCheckout()
+      const url = await createShopifyCheckout(quantity)
       if (tab) {
         tab.location.href = url
       } else {
@@ -156,9 +160,10 @@ function NavBar() {
   }, [])
 
   const navLinks = [
-    { label: 'Recursos', href: '#recursos' },
     { label: 'Conteúdo', href: '#conteudo' },
-    { label: 'Especificações', href: '#specs' },
+    { label: 'Recursos', href: '#recursos' },
+    { label: 'Como Funciona', href: '#como-funciona' },
+    { label: 'Depoimentos', href: '#depoimentos' },
     { label: 'Dúvidas', href: '#faq' },
   ]
 
@@ -181,12 +186,13 @@ function NavBar() {
         </div>
 
         {/* CTA */}
-        <BuyButton
+        <a
+          href="#checkout"
           style={{ background: '#E8780C', borderRadius: '8px', fontSize: '14px', fontWeight: 700, padding: '10px 20px' }}
           className="hidden md:block text-white hover:opacity-90 transition-opacity"
         >
           Comprar agora
-        </BuyButton>
+        </a>
 
         {/* Hamburger */}
         <button className="md:hidden text-white" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
@@ -206,9 +212,9 @@ function NavBar() {
               {label}
             </a>
           ))}
-          <BuyButton extraOnClick={() => setMenuOpen(false)} style={{ background: '#E8780C', borderRadius: '8px', fontWeight: 700 }} className="block w-full mt-3 text-white text-sm text-center py-3">
+          <a href="#checkout" onClick={() => setMenuOpen(false)} style={{ background: '#E8780C', borderRadius: '8px', fontWeight: 700 }} className="block w-full mt-3 text-white text-sm text-center py-3">
             Comprar agora
-          </BuyButton>
+          </a>
         </div>
       )}
     </nav>
@@ -362,7 +368,8 @@ function HeroSection() {
 
             {/* Bottom group: CTA buttons */}
             <div style={{ display: 'flex', gap: '12px' }} id="comprar">
-              <BuyButton
+              <a
+                href="#checkout"
                 style={{
                   flex: 1, background: '#E8780C', color: '#fff',
                   borderRadius: '10px', padding: '15px 24px',
@@ -373,7 +380,7 @@ function HeroSection() {
                 onMouseOut={e => (e.currentTarget.style.opacity = '1')}
               >
                 Comprar agora — R$399
-              </BuyButton>
+              </a>
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -785,7 +792,7 @@ function HowItWorksSection() {
   ]
 
   return (
-    <section className="py-20 bg-[#0a0a0a]">
+    <section id="como-funciona" className="py-20 bg-[#0a0a0a]">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-14">
           <div className="inline-block bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
@@ -866,7 +873,7 @@ function TestimonialsSection() {
   ]
 
   return (
-    <section className="py-20 bg-[#111111]">
+    <section id="depoimentos" className="py-20 bg-[#111111]">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-14">
           <div className="inline-block bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
@@ -919,6 +926,11 @@ function TestimonialsSection() {
 }
 
 function CheckoutSection() {
+  const [qty, setQty] = useState(1)
+  const unitPrice = 399
+  const total = (unitPrice * qty).toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+  const installment = ((unitPrice * qty) / 12).toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+
   return (
     <section id="checkout" className="py-20 bg-[#0a0a0a]">
       <div className="max-w-3xl mx-auto px-4">
@@ -938,12 +950,27 @@ function CheckoutSection() {
             <div className="flex-1">
               <h3 className="text-white font-bold text-lg mb-1">NTVBox — Android TV Box 4K</h3>
               <p className="text-gray-400 text-sm mb-3">Inclui: aparelho, controle por voz, HDMI, fonte e manual</p>
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-black text-white">R$ 399,00</span>
-                <span className="text-gray-500 line-through">R$ 549,00</span>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-2xl font-black text-white">R$ {total}</span>
+                {qty === 1 && <span className="text-gray-500 line-through">R$ 549,00</span>}
                 <span className="bg-orange-500 text-white text-xs font-black px-2 py-0.5 rounded-lg">-27%</span>
               </div>
-              <div className="text-orange-400 text-sm mt-1">ou {CONFIG.priceInstallment} sem juros</div>
+              <div className="text-orange-400 text-sm mb-4">ou 12x R$ {installment} sem juros</div>
+              {/* Seletor de quantidade */}
+              <div className="flex items-center gap-3">
+                <span className="text-gray-400 text-sm">Quantidade:</span>
+                <div className="flex items-center gap-0 border border-[#333] rounded-lg overflow-hidden">
+                  <button
+                    onClick={() => setQty(q => Math.max(1, q - 1))}
+                    className="w-9 h-9 flex items-center justify-center text-white hover:bg-[#2a2a2a] transition-colors text-lg font-bold"
+                  >−</button>
+                  <span className="w-10 text-center text-white font-bold text-sm border-x border-[#333]">{qty}</span>
+                  <button
+                    onClick={() => setQty(q => Math.min(10, q + 1))}
+                    className="w-9 h-9 flex items-center justify-center text-white hover:bg-[#2a2a2a] transition-colors text-lg font-bold"
+                  >+</button>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -985,13 +1012,14 @@ function CheckoutSection() {
             */}
             <BuyButton
               className="block w-full btn-shimmer text-white font-black py-5 rounded-xl text-xl text-center transition-all duration-200 transform hover:scale-[1.03] active:scale-95 shadow-xl shadow-orange-500/30 hover:shadow-[0_0_40px_rgba(232,120,12,0.55)]"
+              quantity={qty}
             >
               <span className="inline-flex items-center justify-center gap-3">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                 </span>
-                Comprar Agora — R$ 399,00
+                Comprar Agora — R$ {total}
               </span>
             </BuyButton>
             <p className="text-center text-gray-500 text-xs mt-2">
@@ -1136,9 +1164,9 @@ function FinalCtaSection() {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-          <BuyButton className="btn-shimmer text-white font-black py-5 px-12 rounded-xl text-xl text-center transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl shadow-orange-500/30">
+          <a href="#checkout" className="btn-shimmer text-white font-black py-5 px-12 rounded-xl text-xl text-center transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl shadow-orange-500/30">
             Comprar Agora — R$399
-          </BuyButton>
+          </a>
           <a
             href={`https://wa.me/${CONFIG.whatsapp.number}?text=${encodeURIComponent(CONFIG.whatsapp.message)}`}
             target="_blank"
@@ -1196,7 +1224,7 @@ function Footer() {
             <ul className="space-y-2 text-gray-500 text-sm">
               <li><a href="#recursos" className="hover:text-orange-400 transition-colors">Recursos</a></li>
               <li><a href="#conteudo" className="hover:text-orange-400 transition-colors">Conteúdo</a></li>
-              <li><a href="#specs" className="hover:text-orange-400 transition-colors">Especificações</a></li>
+              <li><a href="#recursos" className="hover:text-orange-400 transition-colors">Especificações</a></li>
               <li><a href="#faq" className="hover:text-orange-400 transition-colors">Perguntas Frequentes</a></li>
             </ul>
           </div>
@@ -1205,10 +1233,10 @@ function Footer() {
           <div>
             <h4 className="text-white font-bold text-sm mb-4">Informações</h4>
             <ul className="space-y-2 text-gray-500 text-sm">
-              <li><a href="#" className="hover:text-orange-400 transition-colors">Política de Privacidade</a></li>
-              <li><a href="#" className="hover:text-orange-400 transition-colors">Termos de Uso</a></li>
-              <li><a href="#" className="hover:text-orange-400 transition-colors">Política de Troca</a></li>
-              <li><a href="#" className="hover:text-orange-400 transition-colors">Rastrear Pedido</a></li>
+              <li><a href="https://ntv-box.myshopify.com/policies/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition-colors">Política de Privacidade</a></li>
+              <li><a href="https://ntv-box.myshopify.com/policies/terms-of-service" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition-colors">Termos de Uso</a></li>
+              <li><a href="https://ntv-box.myshopify.com/policies/refund-policy" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition-colors">Política de Troca</a></li>
+              <li><a href="https://ntv-box.myshopify.com/apps/track" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition-colors">Rastrear Pedido</a></li>
             </ul>
           </div>
         </div>
