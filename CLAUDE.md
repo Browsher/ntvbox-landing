@@ -190,3 +190,172 @@ Configurados em `layout.tsx`:
 - [ ] Criar `/public/images/og-image.jpg` para Open Graph
 - [ ] Criar `/public/images/logo.png`
 - [ ] Configurar domínio em `layout.tsx` (substituir `https://ntv-box.com`)
+
+---
+
+## Marketing Audit — Resultados (2026-03-25)
+
+**Score geral: 58/100 (Grau C)**
+URL auditada: `https://ntvbox-landing-174w.vercel.app/`
+
+| Categoria | Score | Peso |
+|-----------|-------|------|
+| Content & Messaging | 71/100 | 25% |
+| Conversion Optimization | 72/100 | 20% |
+| SEO & Discoverabilidade | 38/100 | 20% |
+| Posicionamento Competitivo | 58/100 | 15% |
+| Brand & Trust | 62/100 | 10% |
+| Growth & Strategy | 38/100 | 10% |
+
+Relatório completo: `C:\Users\ADM\MARKETING-AUDIT.md`
+
+---
+
+## Copy — Mudanças Prioritárias
+
+### H1 (HeroSection — tag pill + título)
+```
+ANTES:  "Android TV Box — Tecnologia Premium"  ← tag pill
+        "Seu IPTV Favorito."                    ← H1
+DEPOIS: tag pill pode manter "Android TV Box 4K"
+        H1: "Canais, Filmes e Séries. Sem Mensalidade. Para Sempre."
+```
+
+### Subtítulo hero
+```
+ANTES:  "Pare de pagar caro em assinaturas! Acesse milhares de canais,
+         filmes e séries do mundo todo por uma fração do preço."
+DEPOIS: "A TV a cabo te cobra em média R$ 180 por mês — R$ 2.160 por ano.
+         O NTVBox custa R$ 399 uma vez. Sem fidelidade. Sem mensalidade.
+         O aparelho se paga em 2 meses e o resto é economia pura."
+```
+
+### CTAs — trocar para primeira pessoa
+```
+ANTES:  "Comprar agora — R$399"  (aparece 3x idêntico)
+DEPOIS: Hero principal  → "Quero parar de pagar mensalidade →"
+        Meio da página  → "Pedir meu NTVBox agora"
+        FinalCtaSection → "Quero meu NTVBox com frete grátis →"
+        WhatsApp CTA    → "Tirar dúvidas no WhatsApp antes de comprar"
+```
+
+### Urgência/escassez (adicionar perto do preço)
+```
+Adicionar próximo ao bloco de preço no CheckoutSection:
+"Restam apenas 23 unidades neste preço"
+ou
+"Promoção válida enquanto durar o estoque"
+```
+
+### Trust bar sob CTA hero (HeroSection)
+```
+Adicionar imediatamente abaixo do botão "Comprar agora" no hero:
+"⭐ 4,9/5 · 847 avaliações · 12 meses de garantia · Frete grátis"
+```
+
+### Sticky bar mobile (novo componente)
+```
+Novo componente fixo no rodapé (mobile only, CSS position:fixed bottom):
+"Comprar agora — R$ 379,05 no Pix"
+Visível durante todo o scroll.
+```
+
+### Headline TestimonialsSection
+```
+ANTES:  "O que dizem quem já tem NTVBox"  ← erro gramatical
+DEPOIS: "2.400+ famílias brasileiras já trocaram a TV a cabo pelo NTVBox"
+```
+
+### Reordenar depoimentos (TestimonialsSection)
+```
+Ordem atual:    Carlos → Fernanda → Roberto → Patrícia → André → Juliana
+Ordem sugerida: Patrícia (economizei R$200/mês) → Juliana (pai 68 anos) → demais
+Motivo: depoimento com ROI explícito deve vir primeiro.
+```
+
+### FinalCtaSection
+```
+ANTES:  H2: "Garanta o seu NTVBox agora"
+DEPOIS: H2: "Sua TV merece ser muito mais — e você merece parar de pagar por isso todo mês."
+        Sub: "R$ 399 uma vez. R$ 0 por mês. Para sempre."
+Micro-copy sob CTA: "Garantia de 12 meses · Troca em 7 dias · Enviado em 24h"
+```
+
+### FAQ — títulos das perguntas
+```
+"O NTVBox funciona em qualquer televisão?"  → "Funciona na minha TV atual?"
+"É difícil de instalar e configurar?"        → "Preciso de técnico para instalar?"
+"Posso baixar apps da Play Store?"          → "Netflix e YouTube funcionam normalmente?"
+"O cartão TF já vem incluso?"               → "16GB é suficiente para os meus apps?"
+"Qual a velocidade mínima recomendada?"     → "Minha internet é suficiente para 4K?"
+"Qual a política de garantia e trocas?"     → "E se eu não gostar ou vier com defeito?"
+"Como funciona o envio?"                    → "Quanto tempo demora para chegar?"
+"Posso parcelar no cartão?"                 → "Posso parcelar sem juros?"
+```
+
+### HardwareAndBoxSection — copy de specs
+```
+Android TV 12.0:
+ANTES:  "Sistema oficial do Google. Acesse a Play Store e baixe qualquer app."
+DEPOIS: "Android TV 12.0 oficial (não clone) — Google Play Store completa,
+         Google Assistant por voz, certificação para Netflix em 4K."
+```
+
+---
+
+## SEO — Mudanças em layout.tsx
+
+### Meta title
+```
+ANTES:  "NTVBox — Aparelho Android TV 4K | Canais, Filmes e Streaming"
+DEPOIS: "NTVBox — Android TV Box 4K Sem Mensalidade | Canais ao Vivo, Filmes e Streaming"
+```
+
+### Meta description (155 caracteres)
+```
+"NTVBox Android TV Box 4K — R$ 399 pagamento único, zero mensalidade.
+Acesse canais ao vivo, Netflix, YouTube e mais. 2.400+ clientes, 4,9/5.
+Frete grátis para todo o Brasil."
+```
+
+### Schema.org JSON-LD (verificar se está completo)
+```
+Deve conter:
+- Product: name, brand, offers.price (399), offers.priceCurrency ("BRL"),
+           offers.availability, offers.priceValidUntil
+- AggregateRating: ratingValue (4.9), reviewCount (847)
+- FAQPage: todas as 8 perguntas do FaqSection
+- Organization: name, url, contactPoint (WhatsApp)
+```
+
+---
+
+## Âncora de ROI (adicionar na HeroSection ou ContentSection)
+```
+Box visual comparativo:
+┌─────────────────────────────────────────────┐
+│  TV a cabo: R$ 180/mês = R$ 2.160/ano       │
+│  vs                                          │
+│  NTVBox: R$ 399 — pagamento único            │
+│  ✓ Paga-se sozinho em 2 meses               │
+└─────────────────────────────────────────────┘
+```
+
+---
+
+## Estratégia de Crescimento — Funcionalidades Futuras
+
+### Prioridade alta
+- **Captura de e-mail**: pop-up ou seção com lead magnet "10 apps gratuitos para sua NTVBox" → integrar Klaviyo/Mailchimp via Shopify
+- **Programa de referral WhatsApp**: "Indique um amigo e ganhe R$ 50 de desconto"
+- **Upsell no checkout**: Kit Família (2 unidades), cabo HDMI premium, suporte premium
+
+### Prioridade média
+- **Seção "NTVBox vs Concorrentes"**: tabela comparando vs Xiaomi Mi Box S e Amazon Fire TV Stick (Android TV oficial, suporte PT-BR, WhatsApp, preço)
+- **Badge Reclame Aqui**: após criar perfil no RA, adicionar badge na página
+
+### Prioridade SEO (após domínio próprio)
+- Keywords alvo: "melhor tv box 4k 2026", "android tv box barato", "tv box sem mensalidade", "tv box com iptv brasil"
+- Domínio recomendado: `ntvbox.com.br`
+
+Relatório de copy completo: `C:\Users\ADM\COPY-SUGGESTIONS.md`

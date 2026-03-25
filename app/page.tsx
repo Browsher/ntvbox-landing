@@ -25,7 +25,7 @@ const CONFIG = {
     message: 'Olá! Quero comprar o NTVBox. Pode me ajudar?',
   },
   price: 'R$ 399,00',
-  priceInstallment: '12x R$ 38,21',
+  priceInstallment: '12x R$ 40,60',
   delivery: 'Envio em até 24h',
 }
 
@@ -329,7 +329,7 @@ function HeroSection() {
             fontSize: '13px', fontWeight: 600, color: '#bbb',
           }}>
             <span style={{ width: '7px', height: '7px', borderRadius: '50%', background: '#E8780C', flexShrink: 0 }} />
-            Android TV Box — Tecnologia Premium
+            Android TV Box 4K
           </span>
         </div>
 
@@ -345,11 +345,11 @@ function HeroSection() {
                 fontWeight: 800, lineHeight: 1.06,
                 letterSpacing: '-1.5px', color: '#fff', marginBottom: '1rem',
               }}>
-                Seu <span style={{ color: '#E8780C' }}>IPTV</span><br />Favorito.
+                Canais, Filmes e Séries.<br /><span style={{ color: '#E8780C' }}>Sem Mensalidade. Para Sempre.</span>
               </h1>
 
               <p style={{ fontSize: '14px', color: '#777', lineHeight: 1.75, marginBottom: '1.25rem' }}>
-                Pare de pagar caro em assinaturas! Acesse milhares de canais, filmes e séries do mundo todo por uma fração do preço.
+                Pare de jogar dinheiro fora em assinaturas! Acesse milhares de canais, filmes e séries por um preço único, sem mensalidade.
               </p>
 
               <div>
@@ -361,7 +361,7 @@ function HeroSection() {
                   <span style={{ fontSize: '16px', color: '#888', textDecoration: 'line-through' }}>R$ 549,00</span>
                 </div>
                 <div style={{ fontSize: '11px', color: '#E8780C', fontWeight: 600 }}>
-                  ou 12x R$ 38,21 sem juros no cartão
+                  ou 12x R$ 40,60 no cartão
                 </div>
               </div>
             </div>
@@ -379,7 +379,7 @@ function HeroSection() {
                 onMouseOver={e => (e.currentTarget.style.opacity = '0.88')}
                 onMouseOut={e => (e.currentTarget.style.opacity = '1')}
               >
-                Comprar agora — R$399
+                Quero parar de pagar mensalidade →
               </a>
               <a
                 href={whatsappUrl}
@@ -457,7 +457,7 @@ function HeroSection() {
               display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px',
             }}>💳</div>
             <span style={{ fontSize: '12px', color: '#888' }}>
-              Aceitamos Pix, cartão ou boleto — parcele em até 12x sem juros
+              Aceitamos Pix, cartão ou boleto. Parcele em até 12x
             </span>
           </div>
         </div>
@@ -612,10 +612,10 @@ function HardwareAndBoxSection() {
           Row 1 height = max of both headers → garantia de alinhamento
           Row 2 = 1fr → cards e itens ocupam exatamente o mesmo espaço
         */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr auto 1fr', gridTemplateRows: 'auto 1fr' }}>
+        <div className="hardware-outer-grid" style={{ display: 'grid', gridTemplateColumns: '1.1fr auto 1fr', gridTemplateRows: 'auto 1fr' }}>
 
           {/* ── LEFT header (row 1, col 1) ── */}
-          <div style={{ gridRow: 1, gridColumn: 1, paddingBottom: '1.5rem', alignSelf: 'end' }}>
+          <div className="hardware-left-header" style={{ gridRow: 1, gridColumn: 1, paddingBottom: '1.5rem', alignSelf: 'end' }}>
             <span style={pillStyle}>Tecnologia de Ponta</span>
             <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#fff', lineHeight: 1.25, marginBottom: '8px' }}>
               Poder real para{' '}
@@ -627,12 +627,12 @@ function HardwareAndBoxSection() {
           </div>
 
           {/* ── DIVIDER (rows 1–2, col 2) ── */}
-          <div style={{ gridRow: '1 / 3', gridColumn: 2, margin: '0 2.5rem', display: 'flex' }}>
+          <div className="hardware-divider" style={{ gridRow: '1 / 3', gridColumn: 2, margin: '0 2.5rem', display: 'flex' }}>
             <div style={{ width: '1px', background: 'linear-gradient(to bottom, transparent, #2a2a2a, transparent)', flex: 1 }} />
           </div>
 
           {/* ── RIGHT header (row 1, col 3) ── */}
-          <div style={{ gridRow: 1, gridColumn: 3, paddingBottom: '1.5rem', alignSelf: 'end' }}>
+          <div className="hardware-right-header" style={{ gridRow: 1, gridColumn: 3, paddingBottom: '1.5rem', alignSelf: 'end' }}>
             <span style={pillStyle}>O que vem na caixa</span>
             <h2 style={{ fontSize: '22px', fontWeight: 800, color: '#fff', lineHeight: 1.25, marginBottom: '8px' }}>
               Tudo que você precisa,{' '}
@@ -644,7 +644,7 @@ function HardwareAndBoxSection() {
           </div>
 
           {/* ── LEFT cards (row 2, col 1) ── */}
-          <div style={{ gridRow: 2, gridColumn: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'repeat(3, 1fr)', gap: '10px' }}>
+          <div className="hardware-left-cards hardware-cards-grid" style={{ gridRow: 2, gridColumn: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: 'repeat(3, 1fr)', gap: '10px' }}>
             {features.map((f, i) => {
               const hov = hoveredLeft === i
               return (
@@ -664,7 +664,7 @@ function HardwareAndBoxSection() {
           </div>
 
           {/* ── RIGHT items (row 2, col 3) ── */}
-          <div style={{ gridRow: 2, gridColumn: 3, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+          <div className="hardware-right-items" style={{ gridRow: 2, gridColumn: 3, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', gap: '10px' }}>
             {boxItems.map((item, i) => {
               const hov = hoveredRight === i
               return (
@@ -929,7 +929,7 @@ function CheckoutSection() {
   const [qty, setQty] = useState(1)
   const unitPrice = 399
   const total = (unitPrice * qty).toLocaleString('pt-BR', { minimumFractionDigits: 2 })
-  const installment = ((unitPrice * qty) / 12).toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+
 
   return (
     <section id="checkout" className="py-20 bg-[#0a0a0a]">
@@ -941,23 +941,23 @@ function CheckoutSection() {
           </h2>
         </div>
 
-        <div className="card-dark p-8 orange-glow">
+        <div className="card-dark p-4 sm:p-8 orange-glow">
           {/* Product summary */}
-          <div className="flex items-start gap-6 mb-8 pb-8 border-b border-[#2a2a2a]">
-            <div className="w-24 h-24 rounded-xl overflow-hidden flex-shrink-0">
+          <div className="flex flex-col items-center gap-4 mb-6 pb-6 border-b border-[#2a2a2a] text-center">
+            <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-xl overflow-hidden flex-shrink-0">
               <Image src="/images/ntvbox-1.jpg" alt="NTVBox" width={96} height={96} className="object-cover w-full h-full" />
             </div>
-            <div className="flex-1">
-              <h3 className="text-white font-bold text-lg mb-1">NTVBox — Android TV Box 4K</h3>
-              <p className="text-gray-400 text-sm mb-3">Inclui: aparelho, controle por voz, HDMI, fonte e manual</p>
-              <div className="flex items-center gap-2 mb-3">
-                <span className="text-2xl font-black text-white">R$ {total}</span>
-                {qty === 1 && <span className="text-gray-500 line-through">R$ 549,00</span>}
+            <div className="flex-1 min-w-0">
+              <h3 className="text-white font-bold text-base sm:text-lg mb-1">NTVBox · Android TV Box 4K</h3>
+              <p className="text-gray-400 text-xs sm:text-sm mb-3">Inclui: aparelho, controle por voz, HDMI, fonte e manual</p>
+              <div className="flex items-center justify-center flex-wrap gap-2 mb-2">
+                <span className="text-xl sm:text-2xl font-black text-white">R$ {total}</span>
+                {qty === 1 && <span className="text-gray-500 line-through text-sm">R$ 549,00</span>}
                 <span className="bg-orange-500 text-white text-xs font-black px-2 py-0.5 rounded-lg">-27%</span>
               </div>
-              <div className="text-orange-400 text-sm mb-4">ou 12x R$ {installment} sem juros</div>
+              <div className="text-orange-400 text-sm mb-4">ou 12x R$ 40,60 no cartão</div>
               {/* Seletor de quantidade */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-center gap-3">
                 <span className="text-gray-400 text-sm">Quantidade:</span>
                 <div className="flex items-center gap-0 border border-[#333] rounded-lg overflow-hidden">
                   <button
@@ -975,15 +975,15 @@ function CheckoutSection() {
           </div>
 
           {/* Payment methods */}
-          <div className="mb-8">
+          <div className="mb-6 sm:mb-8">
             <div className="text-sm text-gray-400 mb-3 font-medium">Formas de pagamento aceitas:</div>
-            <div className="flex flex-wrap gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3">
               {[
                 { icon: <Svg size={20}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></Svg>, label: 'Pix', desc: 'Pagamento instantâneo' },
-                { icon: <Svg size={20}><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></Svg>, label: 'Cartão de Crédito', desc: 'até 12x sem juros' },
+                { icon: <Svg size={20}><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></Svg>, label: 'Cartão de Crédito', desc: 'até 12x' },
                 { icon: <Svg size={20}><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></Svg>, label: 'Boleto', desc: 'venc. 3 dias úteis' },
               ].map((p, i) => (
-                <div key={i} className="flex items-center gap-2 bg-[#222222] border border-[#333333] rounded-xl px-4 py-3">
+                <div key={i} className="flex items-center gap-3 bg-[#222222] border border-[#333333] rounded-xl px-4 py-3">
                   <span className="text-orange-400">{p.icon}</span>
                   <div>
                     <div className="text-white text-sm font-semibold">{p.label}</div>
@@ -1019,7 +1019,7 @@ function CheckoutSection() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                 </span>
-                Comprar Agora — R$ {total}
+                Pedir meu NTVBox agora
               </span>
             </BuyButton>
             <p className="text-center text-gray-500 text-xs mt-2">
@@ -1044,77 +1044,87 @@ function CheckoutSection() {
         </div>
 
         {/* Pix discount highlight */}
-        <div className="mt-4 text-center text-sm text-gray-500">
-          Pague com <span className="text-white font-bold">Pix</span> e ganhe{' '}
-          <span className="text-orange-400 font-bold">5% de desconto</span> — saindo por apenas R$ 379,05
-        </div>
       </div>
     </section>
   )
 }
 
 function FaqSection() {
+  const categories = ['Instalação', 'Conteúdo', 'Pagamento', 'Garantia']
+
   const faqs = [
-    {
-      q: 'O NTVBox funciona em qualquer televisão?',
-      a: 'Sim! Basta que sua TV tenha uma entrada HDMI. Funciona em Smart TVs, TVs convencionais, monitores e projetos — qualquer tela com HDMI.'
-    },
-    {
-      q: 'É difícil de instalar e configurar?',
-      a: 'Muito simples. Ligue o cabo HDMI na TV, conecte a fonte de energia, ligue o aparelho e conecte ao WiFi. Em menos de 5 minutos está funcionando. Nosso suporte via WhatsApp acompanha você em tempo real se precisar.'
-    },
-    {
-      q: 'Posso baixar apps da Play Store?',
-      a: 'Sim! O NTVBox roda Android TV 12 com acesso completo à Google Play Store. Instale Netflix, YouTube, Prime Video, Disney+, Globoplay e qualquer app disponível para Android TV.'
-    },
-    {
-      q: 'O cartão TF (microSD) já vem incluso?',
-      a: 'O aparelho já vem com 16GB de armazenamento interno. O slot para cartão TF é uma expansão opcional — você pode adicionar um cartão microSD separadamente se precisar de mais espaço.'
-    },
-    {
-      q: 'Qual a velocidade mínima de internet recomendada?',
-      a: 'Para SD e HD, recomendamos no mínimo 10 Mbps. Para streaming em Full HD, 20 Mbps. Para 4K, 25 Mbps ou mais. Com WiFi 5GHz, a conexão é muito mais estável.'
-    },
-    {
-      q: 'Qual a política de garantia e trocas?',
-      a: 'O NTVBox tem garantia de 12 meses contra defeitos de fabricação. Além disso, você tem 7 dias a partir do recebimento para solicitar troca ou devolução por arrependimento, conforme o Código de Defesa do Consumidor.'
-    },
-    {
-      q: 'Como funciona o envio?',
-      a: 'Enviamos para todo o Brasil em até 24 horas após a confirmação do pagamento (exceto fins de semana e feriados). O prazo de entrega varia de 2 a 10 dias úteis dependendo da sua localização.'
-    },
-    {
-      q: 'Posso parcelar no cartão de crédito?',
-      a: 'Sim! Parcelamos em até 12x sem juros no cartão de crédito via Mercado Pago. Também aceitamos Pix (com 5% de desconto) e boleto bancário.'
-    },
+    // Instalação
+    { cat: 'Instalação', q: 'Funciona na minha TV atual?', a: 'Sim! Qualquer TV com entrada HDMI funciona: Smart TV, TV comum, monitor ou projetor. Se sua TV tem HDMI, o NTVBox funciona nela.' },
+    { cat: 'Instalação', q: 'Preciso de técnico para instalar?', a: 'Não. É plug and play: HDMI na TV, fonte na tomada, liga e conecta ao WiFi. Em menos de 5 minutos está funcionando. Se tiver dúvida, nosso suporte no WhatsApp te acompanha em tempo real.' },
+    { cat: 'Instalação', q: 'Minha internet é suficiente para 4K?', a: 'Para HD você precisa de no mínimo 10 Mbps. Para Full HD, 20 Mbps. Para 4K, 25 Mbps ou mais. O NTVBox tem WiFi Dual Band 5GHz, o que garante uma conexão muito mais estável do que aparelhos comuns.' },
+    { cat: 'Instalação', q: 'Funciona sem internet?', a: 'O NTVBox funciona sem internet para arquivos locais (pen drive, HD externo). Para canais ao vivo, filmes e apps como Netflix, é necessária conexão com a internet.' },
+    { cat: 'Instalação', q: 'Consigo usar o controle remoto da minha TV?', a: 'O NTVBox vem com controle remoto por voz próprio. Em algumas TVs com HDMI-CEC ativo, o controle da TV também consegue navegar no aparelho. O controle incluído, porém, é o mais completo e recomendado.' },
+
+    // Conteúdo
+    { cat: 'Conteúdo', q: 'Netflix e YouTube funcionam normalmente?', a: 'Sim! O NTVBox roda Android TV 12 oficial com Google Play Store completa. Netflix, YouTube, Prime Video, Disney+, Globoplay e qualquer app Android TV funcionam normalmente, inclusive com controle por voz.' },
+    { cat: 'Conteúdo', q: 'Tem canais ao vivo?', a: 'Sim. Você acessa canais abertos como Globo, SBT, Record e Band, além de canais fechados como ESPN, Fox Sports, Discovery, TNT e muitos outros. Tudo ao vivo e sem mensalidade.' },
+    { cat: 'Conteúdo', q: 'O conteúdo é legal e seguro?', a: 'O NTVBox é um aparelho Android TV oficial. Todo o conteúdo acessado via Google Play Store é legal. Aplicativos de terceiros instalados pelo usuário são de responsabilidade do próprio usuário.' },
+    { cat: 'Conteúdo', q: 'Posso instalar qualquer app?', a: 'Sim! Com acesso completo à Google Play Store, você instala qualquer app disponível para Android TV. Também é possível instalar apps via APK pelo navegador.' },
+    { cat: 'Conteúdo', q: 'Os streamings funcionam no NTVBox?', a: 'O catálogo do NTVBox já inclui conteúdo de Netflix, Globoplay, Amazon Prime Video, Disney+, Apple TV+ e Paramount+. E se quiser, ainda pode baixar esses e outros apps direto pela Google Play Store.' },
+
+    // Pagamento
+    { cat: 'Pagamento', q: 'Posso parcelar no cartão?', a: 'Sim! Parcelamos em até 12x no cartão de crédito via Mercado Pago. Também aceitamos Pix e boleto bancário.' },
+    { cat: 'Pagamento', q: 'O pagamento é seguro?', a: 'Sim. Todo o processo de pagamento é processado pelo Mercado Pago via Shopify, duas das plataformas mais seguras do Brasil. Seus dados financeiros nunca passam pelo nosso servidor.' },
+    { cat: 'Pagamento', q: 'Quanto tempo demora para chegar?', a: 'Enviamos em até 24 horas após a confirmação do pagamento. O prazo de entrega varia de 2 a 10 dias úteis dependendo da sua localização.' },
+    { cat: 'Pagamento', q: 'Tem frete grátis?', a: 'Sim! O frete é gratuito para todo o Brasil.' },
+    { cat: 'Pagamento', q: 'Como rastrear meu pedido?', a: 'Após o envio, você recebe o código de rastreio por e-mail. Também pode entrar em contato com nosso suporte no WhatsApp para acompanhar sua entrega em tempo real.' },
+
+    // Garantia
+    { cat: 'Garantia', q: 'E se eu não gostar ou vier com defeito?', a: 'Você tem 7 dias a partir do recebimento para devolver sem precisar justificar, conforme o Código de Defesa do Consumidor. Se vier com defeito, fazemos a troca sem burocracia.' },
+    { cat: 'Garantia', q: 'Qual a garantia do produto?', a: 'O NTVBox tem 12 meses de garantia contra defeitos de fabricação. Qualquer problema dentro desse período, substituímos o aparelho.' },
+    { cat: 'Garantia', q: 'Como acionar a garantia?', a: 'Basta entrar em contato pelo nosso WhatsApp descrevendo o problema. Nossa equipe avalia e, se confirmado o defeito, organizamos a troca sem custo para você.' },
+    { cat: 'Garantia', q: 'Tem suporte técnico após a compra?', a: 'Sim! Nosso suporte via WhatsApp está disponível para ajudar com instalação, configuração e qualquer dúvida após a compra. Você não fica sozinho.' },
+    { cat: 'Garantia', q: 'E se parar de funcionar após a garantia?', a: 'Após o período de garantia, continuamos oferecendo suporte técnico pelo WhatsApp. Na maioria dos casos, problemas podem ser resolvidos remotamente sem custo.' },
   ]
 
+  const [activeCategory, setActiveCategory] = useState('Instalação')
   const [openIndex, setOpenIndex] = useState<number | null>(null)
+
+  const filtered = activeCategory === 'Todos' ? faqs : faqs.filter(f => f.cat === activeCategory)
 
   return (
     <section id="faq" className="py-20 bg-[#111111]">
       <div className="max-w-3xl mx-auto px-4">
-        <div className="text-center mb-14">
-          <div className="inline-block bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-4">
-            Perguntas frequentes
+        <div className="text-center mb-10">
+          <div className="inline-block bg-orange-500/10 border border-orange-500/20 text-orange-400 text-xs font-bold px-4 py-1.5 rounded-full mb-4 uppercase tracking-widest">
+            Dúvidas Frequentes
           </div>
-          <h2 className="section-title mb-4">
-            Ficou com{' '}
-            <span className="gradient-text">alguma dúvida?</span>
-          </h2>
-          <p className="text-gray-400">
-            Se não encontrar sua resposta aqui,{' '}
-            <a
-              href={`https://wa.me/${CONFIG.whatsapp.number}`}
-              className="text-orange-400 hover:text-orange-300 font-semibold"
-            >
-              fale conosco no WhatsApp
-            </a>
+          <h2 className="section-title mb-4">Perguntas Frequentes</h2>
+          <p className="text-gray-400 text-sm">
+            Encontre respostas para as principais dúvidas sobre o NTVBox.
           </p>
         </div>
 
+        {/* Category pills */}
+        <div className="flex flex-wrap justify-center gap-2 mb-8">
+          {categories.map(cat => (
+            <button
+              key={cat}
+              onClick={() => { setActiveCategory(cat); setOpenIndex(null) }}
+              style={{
+                background: activeCategory === cat ? '#E8780C' : 'transparent',
+                border: `1px solid ${activeCategory === cat ? '#E8780C' : '#2a2a2a'}`,
+                color: activeCategory === cat ? '#fff' : '#888',
+                borderRadius: '100px',
+                padding: '8px 18px',
+                fontSize: '13px',
+                fontWeight: 600,
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+              }}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+
         <div className="space-y-3">
-          {faqs.map((faq, i) => (
+          {filtered.map((faq, i) => (
             <div key={i} className="card-dark overflow-hidden">
               <button
                 className="w-full flex items-center justify-between p-6 text-left hover:bg-[#222222] transition-colors"
@@ -1125,13 +1135,7 @@ function FaqSection() {
                   +
                 </span>
               </button>
-              <div
-                style={{
-                  display: 'grid',
-                  gridTemplateRows: openIndex === i ? '1fr' : '0fr',
-                  transition: 'grid-template-rows 0.25s ease',
-                }}
-              >
+              <div style={{ display: 'grid', gridTemplateRows: openIndex === i ? '1fr' : '0fr', transition: 'grid-template-rows 0.25s ease' }}>
                 <div style={{ overflow: 'hidden' }}>
                   <div className="px-6 pb-6 text-gray-400 text-sm leading-relaxed border-t border-[#2a2a2a] pt-4">
                     {faq.a}
@@ -1141,6 +1145,13 @@ function FaqSection() {
             </div>
           ))}
         </div>
+
+        <p className="text-center text-gray-500 text-sm mt-8">
+          Não encontrou sua resposta?{' '}
+          <a href={`https://wa.me/${CONFIG.whatsapp.number}`} className="text-orange-400 hover:text-orange-300 font-semibold">
+            Fale conosco no WhatsApp
+          </a>
+        </p>
       </div>
     </section>
   )
@@ -1165,16 +1176,19 @@ function FinalCtaSection() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <a href="#checkout" className="btn-shimmer text-white font-black py-5 px-12 rounded-xl text-xl text-center transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl shadow-orange-500/30">
-            Comprar Agora — R$399
+            Quero meu NTVBox com frete grátis →
           </a>
           <a
             href={`https://wa.me/${CONFIG.whatsapp.number}?text=${encodeURIComponent(CONFIG.whatsapp.message)}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 border-2 border-[#2a2a2a] text-gray-300 hover:border-orange-500/50 hover:text-white font-bold py-5 px-8 rounded-xl text-lg transition-all"
+            className="flex items-center justify-center gap-2 font-bold py-5 px-8 rounded-xl text-lg transition-all"
+            style={{ border: '1.5px solid #25D366', color: '#25D366', background: 'transparent' }}
+            onMouseOver={e => (e.currentTarget.style.background = 'rgba(37,211,102,0.08)')}
+            onMouseOut={e => (e.currentTarget.style.background = 'transparent')}
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.112 1.522 5.843L.057 23.535a.75.75 0 00.916.916l5.692-1.465A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.96 0-3.793-.524-5.371-1.438l-.385-.228-3.985 1.025 1.025-3.985-.228-.385A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
-            Falar no WhatsApp
+            Tirar dúvidas no WhatsApp antes de comprar
           </a>
         </div>
 
@@ -1218,14 +1232,15 @@ function Footer() {
             </a>
           </div>
 
-          {/* Links */}
+          {/* Nav links */}
           <div>
-            <h4 className="text-white font-bold text-sm mb-4">Produto</h4>
+            <h4 className="text-white font-bold text-sm mb-4">Navegação</h4>
             <ul className="space-y-2 text-gray-500 text-sm">
-              <li><a href="#recursos" className="hover:text-orange-400 transition-colors">Recursos</a></li>
               <li><a href="#conteudo" className="hover:text-orange-400 transition-colors">Conteúdo</a></li>
-              <li><a href="#recursos" className="hover:text-orange-400 transition-colors">Especificações</a></li>
-              <li><a href="#faq" className="hover:text-orange-400 transition-colors">Perguntas Frequentes</a></li>
+              <li><a href="#recursos" className="hover:text-orange-400 transition-colors">Recursos</a></li>
+              <li><a href="#como-funciona" className="hover:text-orange-400 transition-colors">Como Funciona</a></li>
+              <li><a href="#depoimentos" className="hover:text-orange-400 transition-colors">Depoimentos</a></li>
+              <li><a href="#faq" className="hover:text-orange-400 transition-colors">Dúvidas</a></li>
             </ul>
           </div>
 
@@ -1236,7 +1251,6 @@ function Footer() {
               <li><a href="https://ntv-box.myshopify.com/policies/privacy-policy" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition-colors">Política de Privacidade</a></li>
               <li><a href="https://ntv-box.myshopify.com/policies/terms-of-service" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition-colors">Termos de Uso</a></li>
               <li><a href="https://ntv-box.myshopify.com/policies/refund-policy" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition-colors">Política de Troca</a></li>
-              <li><a href="https://ntv-box.myshopify.com/apps/track" target="_blank" rel="noopener noreferrer" className="hover:text-orange-400 transition-colors">Rastrear Pedido</a></li>
             </ul>
           </div>
         </div>
@@ -1244,7 +1258,7 @@ function Footer() {
         <div className="border-t border-[#2a2a2a] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-gray-600 text-xs text-center sm:text-left">
             {/* Adicione seu CNPJ aqui */}
-            © 2026 NTVBox. CNPJ: XX.XXX.XXX/0001-XX — Todos os direitos reservados.
+            © 2026 NTVBox. CNPJ: XX.XXX.XXX/0001-XX. Todos os direitos reservados.
           </div>
           <div className="flex items-center gap-2 text-gray-600 text-xs">
             <span>Pagamentos processados por</span>

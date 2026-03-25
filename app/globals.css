@@ -148,3 +148,22 @@ body {
   background: #f97316;
   border-radius: 3px;
 }
+
+/* Hardware section — responsive */
+@media (max-width: 768px) {
+  .hardware-outer-grid {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .hardware-divider {
+    display: none !important;
+  }
+  .hardware-left-header  { order: 1; }
+  .hardware-left-cards   { order: 2; }
+  .hardware-right-header { order: 3; padding-top: 2rem; }
+  .hardware-right-items  { order: 4; }
+  .hardware-cards-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+  }
+}
