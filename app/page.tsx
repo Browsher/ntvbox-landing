@@ -17,7 +17,7 @@ function Svg({ size = 20, children }: { size?: number; children: React.ReactNode
 const CONFIG = {
   shopify: {
     domain: 'ntv-box.myshopify.com',
-    storefrontToken: '18f4bae386da39dd418b4942e697bfaf',
+    storefrontToken: process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN ?? '',
     productHandle: 'ntvbox',
   },
   whatsapp: {
@@ -186,22 +186,24 @@ function NavBar() {
         </div>
 
         {/* CTA */}
-        <a
-          href="#checkout"
-          style={{ background: '#E8780C', borderRadius: '8px', fontSize: '14px', fontWeight: 700, padding: '10px 20px' }}
-          className="hidden md:block text-white hover:opacity-90 transition-opacity"
-        >
-          Comprar agora
-        </a>
+        <div className="flex items-center gap-3">
+          <a
+            href="#checkout"
+            style={{ background: '#E8780C', borderRadius: '8px', fontWeight: 700 }}
+            className="text-white hover:opacity-90 transition-opacity text-xs px-3 py-2 md:text-sm md:px-5 md:py-2.5"
+          >
+            Comprar agora
+          </a>
 
-        {/* Hamburger */}
-        <button className="md:hidden text-white" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {menuOpen
-              ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />}
-          </svg>
-        </button>
+          {/* Hamburger */}
+          <button className="md:hidden text-white" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {menuOpen
+                ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />}
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
@@ -212,9 +214,7 @@ function NavBar() {
               {label}
             </a>
           ))}
-          <a href="#checkout" onClick={() => setMenuOpen(false)} style={{ background: '#E8780C', borderRadius: '8px', fontWeight: 700 }} className="block w-full mt-3 text-white text-sm text-center py-3">
-            Comprar agora
-          </a>
+
         </div>
       )}
     </nav>
@@ -538,12 +538,12 @@ function HardwareAndBoxSection() {
   const [hoveredRight, setHoveredRight] = useState<number | null>(null)
 
   const features = [
-    { icon: <Svg size={18}><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></Svg>, title: 'Processador Allwinner H318', desc: 'Quad-core potente que abre apps em segundos e roda tudo sem travar.' },
-    { icon: <Svg size={18}><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></Svg>, title: '2GB RAM', desc: '2GB de RAM para rodar apps e streaming sem lentidão.' },
-    { icon: <Svg size={18}><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></Svg>, title: 'WiFi Dual Band 2.4/5GHz', desc: 'Conexão estável na banda de 5GHz para streaming 4K sem buffering.' },
-    { icon: <Svg size={18}><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></Svg>, title: 'Android TV 12.0', desc: 'Sistema oficial do Google. Acesse a Play Store e baixe qualquer app.' },
-    { icon: <Svg size={18}><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></Svg>, title: '4K Ultra HD + HDR', desc: 'Imagem nítida com cores reais, como se estivesse no cinema.' },
-    { icon: <Svg size={18}><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></Svg>, title: 'Áudio Dolby Atmos', desc: 'Som envolvente que preenche o ambiente. Compatível com soundbar e home theater.' },
+    { icon: <Svg size={18}><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></Svg>, title: 'Não trava, nem com 4K', spec: 'Allwinner H318 Quad-core', desc: 'Processador que abre apps em segundos e roda tudo sem engasgar.' },
+    { icon: <Svg size={18}><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></Svg>, title: 'Troca de app na hora', spec: '2GB RAM', desc: 'Memória suficiente para rodar streaming, canais e jogos sem precisar reiniciar.' },
+    { icon: <Svg size={18}><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></Svg>, title: 'Sinal estável em qualquer canto', spec: 'WiFi Dual Band 2.4/5GHz', desc: 'Conexão 5GHz para streaming 4K sem travar, mesmo longe do roteador.' },
+    { icon: <Svg size={18}><rect x="2" y="7" width="20" height="15" rx="2" ry="2"/><polyline points="17 2 12 7 7 2"/></Svg>, title: 'Android TV 12 Oficial', spec: 'Android TV 12.0', desc: 'Sistema original do Google com Play Store completa, Netflix e Google Assistant por voz.' },
+    { icon: <Svg size={18}><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></Svg>, title: 'Imagem de cinema em casa', spec: '4K Ultra HD + HDR', desc: 'Cores reais e detalhes que a TV convencional não mostra.' },
+    { icon: <Svg size={18}><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></Svg>, title: 'Som de cinema na sua sala', spec: 'Dolby Atmos', desc: 'Som envolvente em toda a sala. Compatível com soundbar e home theater.' },
   ]
 
   const boxItems = [
@@ -656,7 +656,8 @@ function HardwareAndBoxSection() {
                 >
                   {hov && <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '1px', background: 'rgba(232,120,12,0.4)' }} />}
                   <div style={{ ...iconBox, marginBottom: '10px' }}>{f.icon}</div>
-                  <div style={{ fontSize: '12px', fontWeight: 700, color: '#ddd', marginBottom: '4px' }}>{f.title}</div>
+                  <div style={{ fontSize: '12px', fontWeight: 700, color: '#ddd', marginBottom: '2px' }}>{f.title}</div>
+                  <div style={{ fontSize: '9.5px', fontWeight: 600, color: '#E8780C', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>{f.spec}</div>
                   <div style={{ fontSize: '10.5px', color: '#888', lineHeight: 1.5 }}>{f.desc}</div>
                 </div>
               )
@@ -829,6 +830,20 @@ function HowItWorksSection() {
 function TestimonialsSection() {
   const testimonials = [
     {
+      name: 'Patrícia O.',
+      city: 'São Paulo, SP',
+      rating: 5,
+      text: 'Cancelei a TV por assinatura depois de comprar o NTVBox. Economizei mais de R$200 por mês. O atendimento no WhatsApp foi excelente, responderam na hora.',
+      product: 'NTVBox',
+    },
+    {
+      name: 'Juliana R.',
+      city: 'Recife, PE',
+      rating: 5,
+      text: 'Presente de Natal para meu pai de 68 anos. Ele achou que seria difícil, mas com o controle por voz está usando sozinho. Ficou encantado! Obrigada NTVBox!',
+      product: 'NTVBox',
+    },
+    {
       name: 'Carlos M.',
       city: 'São Paulo, SP',
       rating: 5,
@@ -837,7 +852,7 @@ function TestimonialsSection() {
     },
     {
       name: 'Fernanda L.',
-      city: 'Porto Alegre, RS',
+      city: 'São Paulo, SP',
       rating: 5,
       text: 'Meu marido é louco por futebol. Agora assiste todos os jogos ao vivo sem pagar caro por cabos. O controle por voz é demais, minha filha usa para buscar desenhos sozinha.',
       product: 'NTVBox',
@@ -850,24 +865,10 @@ function TestimonialsSection() {
       product: 'NTVBox',
     },
     {
-      name: 'Patrícia O.',
-      city: 'Fortaleza, CE',
-      rating: 5,
-      text: 'Cancelei a TV por assinatura depois de comprar o NTVBox. Economizei mais de R$200 por mês. O atendimento no WhatsApp foi excelente, responderam na hora.',
-      product: 'NTVBox',
-    },
-    {
       name: 'André T.',
-      city: 'Curitiba, PR',
+      city: 'São Paulo, SP',
       rating: 5,
       text: 'Android TV 12 é muito estável, nunca travou. Já uso há 6 meses. Vale muito o investimento, muito melhor que os concorrentes que já experimentei antes.',
-      product: 'NTVBox',
-    },
-    {
-      name: 'Juliana R.',
-      city: 'Recife, PE',
-      rating: 5,
-      text: 'Presente de Natal para meu pai de 68 anos. Ele achou que seria difícil, mas com o controle por voz está usando sozinho. Ficou encantado! Obrigada NTVBox!',
       product: 'NTVBox',
     },
   ]
@@ -897,7 +898,7 @@ function TestimonialsSection() {
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
-            <div key={i} className="card-dark p-6 hover:border-orange-500/20 transition-colors">
+            <div key={i} className={`card-dark p-6 hover:border-orange-500/20 transition-colors${i >= 4 ? ' hidden sm:block' : ''}`}>
               {/* Stars */}
               <div className="flex gap-0.5 mb-4">
                 {[...Array(t.rating)].map((_, j) => (
@@ -1011,7 +1012,7 @@ function CheckoutSection() {
             ================================================
             */}
             <BuyButton
-              className="block w-full btn-shimmer text-white font-black py-5 rounded-xl text-xl text-center transition-all duration-200 transform hover:scale-[1.03] active:scale-95 shadow-xl shadow-orange-500/30 hover:shadow-[0_0_40px_rgba(232,120,12,0.55)]"
+              className="block w-full btn-shimmer text-white font-black py-5 rounded-xl text-lg text-center transition-all duration-200 transform hover:scale-[1.03] active:scale-95 shadow-xl shadow-orange-500/30 hover:shadow-[0_0_40px_rgba(232,120,12,0.55)]"
               quantity={qty}
             >
               <span className="inline-flex items-center justify-center gap-3">
@@ -1101,7 +1102,7 @@ function FaqSection() {
         </div>
 
         {/* Category pills */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
+        <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-center gap-2 mb-8">
           {categories.map(cat => (
             <button
               key={cat}
@@ -1116,6 +1117,7 @@ function FaqSection() {
                 fontWeight: 600,
                 cursor: 'pointer',
                 transition: 'all 0.2s',
+                width: '100%',
               }}
             >
               {cat}
@@ -1257,8 +1259,7 @@ function Footer() {
 
         <div className="border-t border-[#2a2a2a] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-gray-600 text-xs text-center sm:text-left">
-            {/* Adicione seu CNPJ aqui */}
-            © 2026 NTVBox. CNPJ: XX.XXX.XXX/0001-XX. Todos os direitos reservados.
+            © 2026 NTVBox. Todos os direitos reservados.
           </div>
           <div className="flex items-center gap-2 text-gray-600 text-xs">
             <span>Pagamentos processados por</span>
@@ -1290,12 +1291,28 @@ function WhatsAppFloat() {
   )
 }
 
+// === StickyBarMobile ===
+function StickyBarMobile() {
+  return (
+    <div className="fixed bottom-0 left-0 right-0 z-40 md:hidden" style={{ background: '#0d0d0d', borderTop: '1px solid #1c1c1c', padding: '10px 16px 14px' }}>
+      <a
+        href="#checkout"
+        style={{ background: '#E8780C', borderRadius: '10px', fontWeight: 700, fontSize: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '14px', color: '#fff' }}
+        className="hover:opacity-90 transition-opacity w-full text-center"
+      >
+        Comprar agora
+        <span style={{ fontSize: '13px', opacity: 0.85 }}>· R$ 379,05 no Pix</span>
+      </a>
+    </div>
+  )
+}
+
 // ============================================================
 // PÁGINA PRINCIPAL
 // ============================================================
 export default function Home() {
   return (
-    <main>
+    <main style={{ paddingBottom: '80px' }} className="md:pb-0">
       <NavBar />
       <HeroSection />
       <TrustBar />
@@ -1308,6 +1325,7 @@ export default function Home() {
       <FinalCtaSection />
       <Footer />
       <WhatsAppFloat />
+      <StickyBarMobile />
     </main>
   )
 }

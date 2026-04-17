@@ -4,12 +4,12 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://ntvbox.com.br'),
-  title: 'NTVBox — Aparelho Android TV 4K | Canais, Filmes e Streaming',
-  description: 'NTVBox é o aparelho Android TV com mais de 20.000 canais ao vivo, filmes e séries em Full HD e 4K. Processador Allwinner H318, 2GB RAM, Android TV 12. Frete grátis para todo o Brasil. Compre por R$399.',
-  keywords: 'NTVBox, android tv box, aparelho tv box, canais ao vivo, iptv box, streaming tv, 4k android tv',
+  title: 'NTVBox — Android TV Box 4K Sem Mensalidade | Canais ao Vivo, Filmes e Streaming',
+  description: 'NTVBox Android TV Box 4K — R$ 399 pagamento único, zero mensalidade. Acesse canais ao vivo, Netflix, YouTube e mais. Garantia 12 meses. Frete grátis para todo o Brasil.',
+  keywords: 'NTVBox, android tv box, tv box sem mensalidade, melhor tv box 4k 2026, android tv box barato, tv box com iptv brasil, canais ao vivo, aparelho tv box',
   openGraph: {
-    title: 'NTVBox — Aparelho Android TV 4K | R$399',
-    description: 'Android TV Box com canais ao vivo, filmes e séries. Envio em 24h para todo o Brasil. Garantia de 12 meses.',
+    title: 'NTVBox — Android TV Box 4K Sem Mensalidade | R$ 399',
+    description: 'R$ 399 pagamento único, zero mensalidade. Canais ao vivo, Netflix, YouTube e mais. Frete grátis. Garantia 12 meses.',
     url: 'https://ntvbox.com.br',
     siteName: 'NTVBox',
     locale: 'pt_BR',
@@ -25,9 +25,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'NTVBox — Aparelho Android TV 4K | R$399',
-    description: 'Android TV Box com canais ao vivo, filmes e séries. Envio em 24h para todo o Brasil.',
+    title: 'NTVBox — Android TV Box 4K Sem Mensalidade | R$ 399',
+    description: 'R$ 399 pagamento único, zero mensalidade. Canais ao vivo, Netflix, YouTube e mais. Frete grátis.',
     images: ['/images/og-image.jpg'],
+  },
+  icons: {
+    icon: '/favicon.png',
   },
   robots: {
     index: true,
@@ -77,7 +80,32 @@ export default function RootLayout({
               "@type": "Organization",
               "name": "NTVBox",
               "url": "https://ntvbox.com.br",
-              "logo": "https://ntvbox.com.br/images/logo.png"
+              "logo": "https://ntvbox.com.br/images/logo.png",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+55-87-9813-0541",
+                "contactType": "customer support",
+                "availableLanguage": "Portuguese"
+              }
+            })
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                { "@type": "Question", "name": "Funciona na minha TV atual?", "acceptedAnswer": { "@type": "Answer", "text": "Sim! Qualquer TV com entrada HDMI funciona: Smart TV, TV comum, monitor ou projetor." } },
+                { "@type": "Question", "name": "Preciso de técnico para instalar?", "acceptedAnswer": { "@type": "Answer", "text": "Não. É plug and play: HDMI na TV, fonte na tomada, liga e conecta ao WiFi. Em menos de 5 minutos está funcionando." } },
+                { "@type": "Question", "name": "Netflix e YouTube funcionam normalmente?", "acceptedAnswer": { "@type": "Answer", "text": "Sim! O NTVBox roda Android TV 12 oficial com Google Play Store completa. Netflix, YouTube, Prime Video, Disney+ e qualquer app Android TV funcionam normalmente." } },
+                { "@type": "Question", "name": "Tem frete grátis?", "acceptedAnswer": { "@type": "Answer", "text": "Sim! O frete é gratuito para todo o Brasil." } },
+                { "@type": "Question", "name": "Qual a garantia do produto?", "acceptedAnswer": { "@type": "Answer", "text": "O NTVBox tem 12 meses de garantia contra defeitos de fabricação." } },
+                { "@type": "Question", "name": "Posso parcelar no cartão?", "acceptedAnswer": { "@type": "Answer", "text": "Sim! Parcelamos em até 12x no cartão de crédito. Também aceitamos Pix (com 5% de desconto) e boleto bancário." } },
+                { "@type": "Question", "name": "E se eu não gostar ou vier com defeito?", "acceptedAnswer": { "@type": "Answer", "text": "Você tem 7 dias a partir do recebimento para devolver sem precisar justificar. Se vier com defeito, fazemos a troca sem burocracia." } },
+                { "@type": "Question", "name": "Tem canais ao vivo?", "acceptedAnswer": { "@type": "Answer", "text": "Sim. Você acessa canais abertos como Globo, SBT, Record e Band, além de canais fechados como ESPN, Fox Sports, Discovery e TNT." } }
+              ]
             })
           }}
         />
