@@ -349,7 +349,7 @@ function HeroSection() {
               </h1>
 
               <p style={{ fontSize: '14px', color: '#777', lineHeight: 1.75, marginBottom: '1.25rem' }}>
-                Pare de jogar dinheiro fora em assinaturas! Acesse milhares de canais, filmes e séries por um preço único, sem mensalidade.
+                Mais de 20.000 canais ao vivo, filmes e séries — funcionando em 3 minutos, sem técnico, sem contrato, sem surpresa no cartão.
               </p>
 
               <div>
@@ -445,7 +445,7 @@ function HeroSection() {
               ))}
             </div>
             <span style={{ fontSize: '13px', color: '#666' }}>
-              <strong style={{ color: '#fff' }}>+2.400 clientes</strong> já assistem com NTVBox
+              Seja um dos <strong style={{ color: '#fff' }}>primeiros</strong> a transformar sua TV
             </span>
           </div>
 
@@ -892,7 +892,7 @@ function TestimonialsSection() {
             </div>
             <span className="font-bold text-white">4.9/5</span>
             <span>·</span>
-            <span>+847 avaliações verificadas</span>
+            <span>Avaliações de clientes</span>
           </div>
         </div>
 
